@@ -5,7 +5,8 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
-      "@/astro-paper.config": ["./astro-paper.config"]
+      "@/site.config": ["./site.config"],
+      "@/site.config": ["./site.config"]
     }
   }
 }
