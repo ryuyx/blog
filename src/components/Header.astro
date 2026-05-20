@@ -5,6 +5,7 @@ import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import IconArchive from "@/assets/icons/IconArchive.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconSearch from "@/assets/icons/IconSearch.svg";
+import IconLanguage from "@/assets/icons/IconLanguage.svg";
 import IconMoon from "@/assets/icons/IconMoon.svg";
 import IconX from "@/assets/icons/IconX.svg";
 import LinkButton from "./LinkButton.astro";
@@ -176,12 +177,13 @@ const isActive = (path: string) => {
         <li class="col-span-1 flex items-center justify-center">
           <a
             href={getRelativeLocaleUrl(otherLocale, "")}
-            class="focus-outline hover:text-accent relative size-12 px-2 py-1 text-sm font-medium sm:size-8 sm:px-1"
+            class="focus-outline hover:[&>svg]:stroke-accent relative size-12 p-4 sm:size-8"
             aria-label={labels[otherLocale]}
             title={labels[otherLocale]}
             data-locale-switch
           >
-            {labels[otherLocale]}
+            <IconLanguage class="absolute top-[50%] left-[50%] size-6 -translate-x-1/2 -translate-y-1/2" />
+            <span class="sr-only">{labels[otherLocale]}</span>
           </a>
         </li>
       </ul>

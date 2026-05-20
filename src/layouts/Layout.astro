@@ -112,6 +112,37 @@ const rssHref = getRelativeLocaleUrl(
       })();
     </script>
 
+    <style set:html={`
+      @font-face {
+        font-family: "Noto Sans SC";
+        src: url("${getAssetPath("fonts/NotoSansSC-Light.otf")}") format("opentype");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Noto Sans SC";
+        src: url("${getAssetPath("fonts/NotoSansSC-Regular.otf")}") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Noto Sans SC";
+        src: url("${getAssetPath("fonts/NotoSansSC-Medium.otf")}") format("opentype");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Noto Sans SC";
+        src: url("${getAssetPath("fonts/NotoSansSC-Bold.otf")}") format("opentype");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+    `}></style>
+
     <ClientRouter />
   </head>
   <body
