@@ -17,6 +17,20 @@ const { site, features } = config;
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
 
+const LOCALE_COOKIE = "x-locale";
+
+const otherLocales: Record<string, string> = {
+  en: "zh",
+  zh: "en",
+};
+
+const otherLocale = otherLocales[locale] ?? "en";
+
+const labels: Record<string, string> = {
+  en: "English",
+  zh: "中文",
+};
+
 // Strip the base prefix so isActive comparisons work regardless of deploy subdirectory.
 // e.g. with base "/blog": "/blog/posts/slug" → "/posts/slug"
 const relativePath = stripBase(Astro.url.pathname);
@@ -159,6 +173,17 @@ const isActive = (path: string) => {
             </li>
           )
         }
+        <li class="col-span-1 flex items-center justify-center">
+          <a
+            href={getRelativeLocaleUrl(otherLocale, "")}
+            class="focus-outline hover:text-accent relative size-12 px-2 py-1 text-sm font-medium sm:size-8 sm:px-1"
+            aria-label={labels[otherLocale]}
+            title={labels[otherLocale]}
+            data-locale-switch
+          >
+            {labels[otherLocale]}
+          </a>
+        </li>
       </ul>
     </nav>
   </div>

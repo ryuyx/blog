@@ -1,4 +1,4 @@
-import { defineCollection } from "astro:content";
+import { defineCollection, reference } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 import config from "@/config";
@@ -21,6 +21,9 @@ const posts = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
+      /** Language of this post content */
+      lang: z.enum(["zh", "en"]).optional(),
+      /** ID of the translated version of this post */
     }),
 });
 
@@ -31,6 +34,7 @@ const pages = defineCollection({
     description: z.string().optional(),
     ogImage: z.string().optional(),
     canonicalURL: z.string().optional(),
+    lang: z.enum(["zh", "en"]).optional(),
   }),
 });
 

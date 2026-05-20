@@ -7,7 +7,7 @@ export default defineSiteConfig({
     description: "A personal blog.",
     author: "Ryuyx",
     ogImage: "default-og.jpg",
-    lang: "en",
+    lang: "zh",
     timezone: "Asia/Shanghai",
     dir: "ltr",
   },
