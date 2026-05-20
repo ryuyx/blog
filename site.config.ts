@@ -2,7 +2,7 @@ import { defineSiteConfig } from "./src/types/config";
 
 export default defineSiteConfig({
   site: {
-    url: "https://your-blog.com",
+    url: "https://ryuyx.github.io/blog",
     title: "Ryuyx's Blog",
     description: "A personal blog.",
     author: "Ryuyx",
