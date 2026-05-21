@@ -2,13 +2,11 @@ import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { getPostUrl } from "@/utils/getPostPaths";
-import { getPostsByLocale } from "@/utils/getPostsByLocale";
 import config from "@/config";
 
 export async function GET() {
   const posts = await getCollection("posts");
-  const localePosts = getPostsByLocale(posts, "zh");
-  const sortedPosts = getSortedPosts(localePosts);
+  const sortedPosts = getSortedPosts(posts);
 
   return rss({
     title: config.site.title,

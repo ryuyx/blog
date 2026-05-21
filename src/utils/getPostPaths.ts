@@ -1,7 +1,6 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { BLOG_PATH } from "@/content.config";
 import { slugifyStr } from "./slugify";
-import { getPostBaseId } from "./getPostsByLocale";
 import config from "@/config";
 
 function getPostPathSegments(filePath: string | undefined): string[] {
@@ -11,22 +10,14 @@ function getPostPathSegments(filePath: string | undefined): string[] {
       .split("/")
       .filter(path => path !== "")
       .filter(path => !path.startsWith("_"))
-      // Skip locale prefix directory (zh/, en/)
-      .filter(path => path !== "zh" && path !== "en")
       .slice(0, -1)
       .map(segment => slugifyStr(segment)) ?? []
   );
 }
 
-function getIdSlug(id: string): string {
-  const postId = id.split("/");
-  return postId.length > 0 ? String(postId[postId.length - 1]) : id;
-}
-
 function getPostSlugPath(id: string, filePath: string | undefined): string {
   const pathSegments = getPostPathSegments(filePath);
-  const baseId = getPostBaseId(id);
-  const slug = slugifyStr(baseId);
+  const slug = slugifyStr(id);
   return pathSegments.length > 0
     ? [...pathSegments, slug].join("/")
     : String(slug);

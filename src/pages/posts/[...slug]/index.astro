@@ -6,7 +6,6 @@ import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
 import Tag from "@/components/Tag.astro";
 import { getPostUrl } from "@/utils/getPostPaths";
-import { getPostBaseId, getPostSlugFromId } from "@/utils/getPostsByLocale";
 import { slugifyStr } from "@/utils/slugify";
 import EditPost from "./_components/EditPost.astro";
 import ShareLinks from "./_components/ShareLinks.astro";
@@ -18,61 +17,29 @@ import config from "@/config";
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
 
-  const grouped = new Map<string, CollectionEntry<"posts">[]>();
-  for (const post of posts) {
-    const baseId = getPostBaseId(post.id);
-    const existing = grouped.get(baseId) ?? [];
-    existing.push(post);
-    grouped.set(baseId, existing);
-  }
+  const paths = posts.map(post => ({
+    params: { slug: slugifyStr(post.id) },
+    props: { post, prevPost: null as AdjacentPost, nextPost: null as AdjacentPost },
+  }));
 
-  const allPaths: {
-    params: { slug: string };
-    props: { post: CollectionEntry<"posts">; prevPost: any; nextPost: any };
-  }[] = [];
+  paths.sort(
+    (a, b) =>
+      new Date(b.props.post.data.pubDatetime).getTime() -
+      new Date(a.props.post.data.pubDatetime).getTime()
+  );
 
-  const postLang = (p: CollectionEntry<"posts">) =>
-    (p.data as { lang?: string }).lang ?? "zh";
-
-  for (const [, versions] of grouped) {
-    for (const locale of ["zh", "en"]) {
-      const preferred = versions.find(p => postLang(p) === locale);
-      const fallback = versions.find(p => postLang(p) === "zh");
-      const post = preferred ?? fallback;
-      if (!post) continue;
-
-      const slug = getPostSlugFromId(post.id);
-
-      allPaths.push({
-        params: { slug },
-        props: { post, prevPost: null, nextPost: null },
-      });
-    }
-  }
-
-  const localeOrder: Record<string, number> = { zh: 0, en: 1 };
-  allPaths.sort((a, b) => {
-    const aLang = postLang(a.props.post);
-    const bLang = postLang(b.props.post);
-    const lDiff = (localeOrder[aLang] ?? 0) - (localeOrder[bLang] ?? 0);
-    if (lDiff !== 0) return lDiff;
-    const aDate = new Date(a.props.post.data.pubDatetime).getTime();
-    const bDate = new Date(b.props.post.data.pubDatetime).getTime();
-    return bDate - aDate;
-  });
-
-  for (let i = 0; i < allPaths.length; i++) {
+  for (let i = 0; i < paths.length; i++) {
     if (i > 0) {
-      const prev = allPaths[i - 1];
-      allPaths[i].props.prevPost = {
+      const prev = paths[i - 1];
+      paths[i].props.prevPost = {
         id: prev.props.post.id,
         title: prev.props.post.data.title,
         filePath: prev.props.post.filePath,
       };
     }
-    if (i < allPaths.length - 1) {
-      const next = allPaths[i + 1];
-      allPaths[i].props.nextPost = {
+    if (i < paths.length - 1) {
+      const next = paths[i + 1];
+      paths[i].props.nextPost = {
         id: next.props.post.id,
         title: next.props.post.data.title,
         filePath: next.props.post.filePath,
@@ -80,7 +47,7 @@ export async function getStaticPaths() {
     }
   }
 
-  return allPaths;
+  return paths;
 }
 
 type AdjacentPost = {

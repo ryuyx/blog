@@ -4,7 +4,7 @@ import { fontData, experimental_getFontFileURL } from "astro:assets";
 import satori from "satori";
 import sharp from "sharp";
 import { getFontPathByWeight } from "@/utils/getFontPathByWeight";
-import { getPostSlugFromId } from "@/utils/getPostsByLocale";
+import { slugifyStr } from "@/utils/slugify";
 import config from "@/config";
 
 export async function getStaticPaths() {
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
   );
 
   return posts.map(post => ({
-    params: { slug: getPostSlugFromId(post.id) },
+    params: { slug: slugifyStr(post.id) },
     props: post,
   }));
 }
