@@ -38,7 +38,7 @@ const projects = await Promise.all(
     return {
       name: gh?.name ?? p.repo,
       description: gh?.description ?? p.fallback ?? "",
-      url: gh?.html_url ?? `https://github.com/${p.owner}/${p.repo}`,
+      url: gh?.homepage || gh?.html_url || `https://github.com/${p.owner}/${p.repo}`,
       language: gh?.language ?? undefined,
       stars: gh?.stargazers_count ?? undefined,
     };
