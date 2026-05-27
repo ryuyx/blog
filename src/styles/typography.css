@@ -96,6 +96,15 @@
     @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
   }
 
+  /* ===== Mermaid diagrams ===== */
+  .mermaid-rendered {
+    @apply my-6 flex justify-center overflow-x-auto rounded-lg bg-white p-4;
+  }
+
+  html[data-theme="dark"] .mermaid-rendered {
+    @apply bg-slate-800;
+  }
+
   /* Styles for Shiki transformers */
   /* https://shiki.style/packages/transformers */
   .astro-code {

@@ -34,6 +34,10 @@ export default defineConfig({
     },
   },
   markdown: {
+    syntaxHighlight: {
+      type: "shiki",
+      excludeLangs: ["mermaid"],
+    },
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
     shikiConfig: {
       themes: { light: "min-light", dark: "night-owl" },
