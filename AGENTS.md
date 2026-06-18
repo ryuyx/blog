@@ -100,12 +100,6 @@
 - Template strings use `{{placeholder}}` syntax — use `tplStr` from `@/i18n` for formatting.
 - Locale detection in `src/middleware.ts`: checks cookie `x-locale`, then `Accept-Language` header, falls back to `"zh"`.
 
-### Configuration
-
-- User-editable config: `site.config.ts` (uses `defineSiteConfig` helper from `src/types/config.ts`).
-- Internal resolved config: `src/config.ts` (applies defaults, exports fully-resolved `ResolvedSiteConfigOutput`).
-- Content collections defined in `src/content.config.ts` using `defineCollection` with Zod schemas.
-
 ### Content Collections
 
 - Posts stored in `src/content/posts/` (`.md`, `.mdx`), pages in `src/content/pages/`.

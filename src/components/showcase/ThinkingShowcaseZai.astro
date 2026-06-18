@@ -1,0 +1,88 @@
+---
+import IconBrain from "@/assets/icons/IconBrain.svg";
+---
+
+<div
+  class="rounded-lg bg-white"
+>
+  <details>
+    <summary class="block w-full cursor-pointer list-none select-none px-3 py-2.5">
+      <div class="flex items-center justify-between gap-4">
+        <span class="flex items-center gap-1.5 text-sm whitespace-nowrap">
+          <IconBrain class="h-4 w-4 flex-shrink-0 zai-brain" aria-hidden="true" />
+          <span class="zai-shimmer-text">正在思考</span>
+        </span>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="zai-arrow size-4 opacity-40 transition-transform duration-200"
+        >
+          <path
+            d="M6 4L10 8L6 12"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.33"
+          />
+        </svg>
+      </div>
+    </summary>
+    <div class="space-y-2 px-3 pb-1 pt-3 text-sm">
+      <p>用户问的是"为什么"，不是"是什么"——先搞清楚意图。</p>
+      <p>这道题表面是数学，本质是一个图论问题……等等，不对。</p>
+      <p>重新推导一遍，第三步有个隐含假设需要验证。</p>
+      <p>找到了三篇相关论文，其中一篇结论和另两篇相反，先标记冲突。</p>
+      <p>整理思路，准备输出——结构：背景 → 核心逻辑 → 反例 → 结论。</p>
+    </div>
+  </details>
+</div>
+
+<style>
+  details[open] .zai-arrow {
+    rotate: 90deg;
+  }
+
+  .zai-brain {
+    animation: zai-pulse 2s ease-in-out infinite;
+  }
+
+  .zai-shimmer-text {
+    color: transparent;
+    background: linear-gradient(
+      110deg,
+      color-mix(in srgb, var(--foreground) 50%, transparent) 0%,
+      color-mix(in srgb, var(--foreground) 50%, transparent) 35%,
+      black 50%,
+      color-mix(in srgb, var(--foreground) 50%, transparent) 65%,
+      color-mix(in srgb, var(--foreground) 50%, transparent) 100%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: zai-shimmer-scan 4s linear infinite;
+  }
+
+  @keyframes zai-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes zai-shimmer-scan {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .zai-brain,
+    .zai-shimmer-text {
+      animation: none;
+    }
+    .zai-shimmer-text {
+      color: color-mix(in srgb, var(--foreground) 50%, transparent);
+      background: none;
+    }
+  }
+</style>

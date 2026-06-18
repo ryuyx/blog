@@ -1,0 +1,65 @@
+---
+import IconKimi from "@/assets/icons/IconKimi.svg";
+---
+
+<div
+  class="rounded-lg border border-gray bg-white has-[details[open]]:bg-[color-mix(in_srgb,var(--foreground)_3%,transparent)]"
+>
+  <details class="w-full">
+    <summary class="block w-full cursor-pointer list-none select-none px-3 py-2.5">
+      <div class="flex items-center justify-between gap-4">
+        <span class="flex items-center gap-1.5 text-sm whitespace-nowrap">
+          <IconKimi class="h-4 w-4 opacity-80 flex-shrink-0" aria-hidden="true" />
+          <span class="kimi-shimmer">正在思考中</span>
+        </span>
+        <span class="kimi-arrow flex text-sm opacity-40 transition-transform duration-250" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" width="1em" height="1em">
+            <path d="M681.00096 549.23264a36.864 36.864 0 0 0-0.08192-52.0192L395.22304 211.47648a36.864 36.864 0 1 0-52.14208 52.10112l259.6864 259.72736-259.76832 261.69344a36.864 36.864 0 0 0 52.30592 51.93728l285.696-287.744z"/>
+          </svg>
+        </span>
+      </div>
+    </summary>
+    <div class="space-y-2 px-3 pb-1 pt-3 text-sm">
+      <p>用户问的是"为什么"，不是"是什么"——先搞清楚意图。</p>
+      <p>这道题表面是数学，本质是一个图论问题……等等，不对。</p>
+      <p>重新推导一遍，第三步有个隐含假设需要验证。</p>
+      <p>找到了三篇相关论文，其中一篇结论和另两篇相反，先标记冲突。</p>
+      <p>整理思路，准备输出——结构：背景 → 核心逻辑 → 反例 → 结论。</p>
+    </div>
+  </details>
+</div>
+
+<style>
+  details[open] .kimi-arrow {
+    transform: rotate(90deg);
+  }
+
+  .kimi-shimmer {
+    background: linear-gradient(
+      110deg,
+      color-mix(in srgb, var(--foreground) 60%, transparent) 0%,
+      color-mix(in srgb, white 80%, var(--foreground) 20%) 50%,
+      color-mix(in srgb, var(--foreground) 60%, transparent) 100%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: kimi-shimmer-scan 4s linear infinite;
+  }
+
+  @keyframes kimi-shimmer-scan {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kimi-shimmer {
+      animation: none;
+      background: none;
+      -webkit-text-fill-color: unset;
+      background-clip: unset;
+      color: color-mix(in srgb, var(--foreground) 60%, transparent);
+    }
+  }
+</style>

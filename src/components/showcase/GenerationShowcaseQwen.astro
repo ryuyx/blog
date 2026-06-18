@@ -1,0 +1,83 @@
+---
+import IconBrain from "@/assets/icons/IconBrain.svg";
+
+const allTokens = ["我", "给", "自己", "定了", "十条", "规矩", "：", "一秒半", "内", "必须", "开口", "，", "说话", "要", "像", "挤牙膏", "一点", "一点", "给", "，", "代码", "必须", "整段", "输出", "，", "句号", "后", "假装", "思考", "停一停", "，", "绝不", "让", "你的", "浏览器", "卡顿", "，", "你", "说", "停", "我", "就", "停", "且", "能", "续上", "，", "只", "推送", "新", "内容", "不", "重绘", "全文", "，", "写", "长", "东西", "前", "先", "刷个", "“", "加载中", "”", "绝不", "抢", "你的", "输入框", "，", "最后", "——", "我", "知道", "什么", "时候", "该", "闭嘴", "。", "说完了", "，", "再见", "。"];
+
+const TOKEN_DELAY_STEP = 92;
+---
+
+<div class="rounded-lg border border-gray bg-white px-3 py-3">
+  <div class="mb-2 flex items-center gap-1.5 text-sm">
+    <IconBrain class="qwen-brain h-4 w-4" aria-hidden="true" />
+    <span class="font-medium">Qwen 生成中</span>
+  </div>
+  <div class="qwen-container space-y-2 text-sm leading-6">
+    {
+      allTokens.map((token, tokenIndex) => (
+        <span
+          class="qwen-token"
+          style={`--token-delay: ${tokenIndex * TOKEN_DELAY_STEP}ms;`}
+        >
+          {token}
+        </span>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const el = document.querySelector<HTMLElement>(".qwen-container");
+  if (el) {
+    const TOKEN_DELAY_STEP = 92;
+    const totalTokens = 74;
+    const LOOP_DELAY = (totalTokens - 1) * TOKEN_DELAY_STEP + 3000;
+
+    let timer: ReturnType<typeof setTimeout>;
+
+    function revealTokens() {
+      const tokens = Array.from(el.querySelectorAll<HTMLElement>(".qwen-token"));
+      tokens.forEach((t, i) => {
+        setTimeout(() => {
+          t.classList.add("revealed");
+        }, i * TOKEN_DELAY_STEP);
+      });
+    }
+
+    function resetAndReveal() {
+      const tokens = el.querySelectorAll<HTMLElement>(".qwen-token");
+      tokens.forEach((t) => t.classList.remove("revealed"));
+      clearTimeout(timer);
+      timer = setTimeout(revealTokens, 50);
+    }
+
+    revealTokens();
+    setInterval(resetAndReveal, LOOP_DELAY);
+  }
+</script>
+
+<style>
+  .qwen-brain {
+    color: #f59e0b;
+  }
+
+  .qwen-line {
+    line-height: 1.65;
+  }
+
+  .qwen-token {
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .qwen-token.revealed {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .qwen-token {
+      opacity: 1;
+      transition: none;
+    }
+  }
+</style>
