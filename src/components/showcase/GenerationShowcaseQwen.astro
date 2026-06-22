@@ -35,7 +35,7 @@ const TOKEN_DELAY_STEP = 92;
     let timer: ReturnType<typeof setTimeout>;
 
     function revealTokens() {
-      const tokens = Array.from(el.querySelectorAll<HTMLElement>(".qwen-token"));
+      const tokens = Array.from(el!.querySelectorAll<HTMLElement>(".qwen-token"));
       tokens.forEach((t, i) => {
         setTimeout(() => {
           t.classList.add("revealed");
@@ -44,7 +44,7 @@ const TOKEN_DELAY_STEP = 92;
     }
 
     function resetAndReveal() {
-      const tokens = el.querySelectorAll<HTMLElement>(".qwen-token");
+      const tokens = el!.querySelectorAll<HTMLElement>(".qwen-token");
       tokens.forEach((t) => t.classList.remove("revealed"));
       clearTimeout(timer);
       timer = setTimeout(revealTokens, 50);
