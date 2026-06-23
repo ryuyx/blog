@@ -31,12 +31,18 @@
 @layer base {
   * {
     @apply border-border outline-accent/75;
-    scrollbar-width: auto;
-    scrollbar-color: var(--color-muted) transparent;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+  body {
+    font-family: var(--font-app);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
   }
   a,
   button {
-    @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+    @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-2;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -49,13 +55,19 @@
 }
 
 @utility app-layout {
-  @apply max-w-app mx-auto w-full px-4;
+  @apply max-w-app mx-auto w-full px-6;
 }
 
 @utility active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-8;
+  @apply text-accent font-medium;
+}
+
+@utility glass-surface {
+  background-color: var(--surface);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
 }
 
 :target {
-  scroll-margin-block: 1rem;
+  scroll-margin-block: 5rem;
 }

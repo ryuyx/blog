@@ -7,28 +7,32 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-app: "Noto Sans SC", var(--font-google-sans-code);
+  --color-surface: var(--surface);
+  --font-app: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", var(--font-google-sans-code), sans-serif;
 }
 
-/* Light theme values */
+/* Light theme — Apple HIG color palette */
 :root,
 [data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
+  --background: #ffffff;
+  --foreground: #1d1d1f;
+  --accent: #0071e3;
   --accent-foreground: #ffffff;
-  --muted: #e6e6e6;
-  --muted-foreground: #6b7280;
-  --border: #ece9e9;
+  --muted: #f5f5f7;
+  --muted-foreground: #86868b;
+  --border: #d2d2d7;
+  --surface: rgba(255, 255, 255, 0.72);
 }
 
-/* Dark theme values */
+/* Dark theme — Apple dark HIG palette */
 [data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --accent-foreground: #ffffff;
-  --muted: #343f60;
-  --muted-foreground: #afb9ca;
-  --border: #ab4b08;
+  --background: #000000;
+  --foreground: #f5f5f7;
+  --accent: #2997ff;
+  --accent-foreground: #000000;
+  --muted: #1d1d1f;
+  --muted-foreground: #86868b;
+  --border: #424245;
+  --surface: rgba(28, 28, 30, 0.72);
 }

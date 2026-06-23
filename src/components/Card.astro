@@ -13,19 +13,22 @@ const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 const { title, description, ...props } = data;
 ---
 
-<li class="my-6">
+<li class="group py-5 first:pt-2">
   <a
     href={getPostUrl(id, filePath, Astro.currentLocale)}
     class:list={[
-      "text-accent inline-block text-lg font-medium",
-      "decoration-dashed underline-offset-4 hover:underline",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
+      "text-foreground block text-base font-medium tracking-tight",
+      "transition-colors hover:text-accent",
+      "focus-visible:no-underline",
     ]}
   >
-    <Heading transition:name={slugifyStr(title.replaceAll(".", "-"))}>
+    <Heading
+      transition:name={slugifyStr(title.replaceAll(".", "-"))}
+      class="text-lg leading-snug"
+    >
       {title}
     </Heading>
   </a>
-  <Datetime {...props} />
-  <p>{description}</p>
+  <Datetime class="mt-1.5" {...props} />
+  <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p>
 </li>

@@ -8,7 +8,6 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
 import Card from "@/components/Card.astro";
-import LinkButton from "@/components/LinkButton.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
@@ -33,54 +32,36 @@ const homePath = getRelativeLocaleUrl(locale, "");
     data-home-path={homePath}
     class="app-layout"
   >
-    <section id="hero" class="border-border border-b pt-8 pb-6">
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
+    <section id="hero" class="border-border border-b py-12 sm:py-16">
+      <h1 class="text-foreground text-4xl font-bold tracking-tight sm:text-5xl">
         Mingalaba
       </h1>
-      <a
-        target="_blank"
-        href={getRelativeLocaleUrl(locale, "rss.xml")}
-        class="inline-block"
-        aria-label="RSS Feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </a>
-
-      <p>
+      <p class="text-muted-foreground mt-4 text-base leading-relaxed sm:text-lg">
         A personal blog — sharing thoughts, notes, and projects.
       </p>
-      <p class="mt-2">
-        Check out the
-        <LinkButton
-          class="hover:text-accent underline decoration-dashed underline-offset-4"
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <a
           href={getRelativeLocaleUrl(locale, "posts")}
+          class="bg-accent text-accent-foreground rounded-full px-4 py-1.5 text-sm font-medium transition-opacity hover:opacity-80"
         >
-          blog posts
-        </LinkButton>
-        or subscribe to the
-        <LinkButton
-          class="hover:text-accent underline decoration-dashed underline-offset-4"
+          {t.nav.posts}
+        </a>
+        <a
+          target="_blank"
           href={getRelativeLocaleUrl(locale, "rss.xml")}
+          class="bg-muted text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors"
+          aria-label="RSS Feed"
+          title="RSS Feed"
         >
-          RSS feed
-        </LinkButton>.
-      </p>
-      {
-        socials.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">
-              {t.home.socialLinks}:
-            </div>
+          <IconRss width={14} height={14} class="stroke-current stroke-2 rtl:-rotate-90" />
+          RSS
+        </a>
+        {
+          socials.length > 0 && (
             <Socials />
-          </div>
-        )
-      }
+          )
+        }
+      </div>
     </section>
 
     {
@@ -88,14 +69,14 @@ const homePath = getRelativeLocaleUrl(locale, "");
         <section
           id="featured"
           class:list={[
-            "pt-12 pb-6",
+            "py-10",
             { "border-border border-b": recentPosts.length > 0 },
           ]}
         >
-          <h2 class="text-2xl font-semibold tracking-wide">
+          <h2 class="text-foreground mb-1 text-xs font-semibold tracking-widest uppercase opacity-50">
             {t.home.featured}
           </h2>
-          <ul>
+          <ul class="divide-border divide-y">
             {featuredPosts.map(data => (
               <Card variant="h3" {...data} />
             ))}
@@ -106,11 +87,11 @@ const homePath = getRelativeLocaleUrl(locale, "");
 
     {
       recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">
+        <section id="recent-posts" class="py-10">
+          <h2 class="text-foreground mb-1 text-xs font-semibold tracking-widest uppercase opacity-50">
             {t.home.recentPosts}
           </h2>
-          <ul>
+          <ul class="divide-border divide-y">
             {recentPosts.slice(0, postsConfig.perIndex).map(data => (
               <Card variant="h3" {...data} />
             ))}
@@ -119,11 +100,14 @@ const homePath = getRelativeLocaleUrl(locale, "");
       )
     }
 
-    <div class="my-8 text-center">
-      <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
+    <div class="border-border border-t py-8 text-center">
+      <a
+        href={getRelativeLocaleUrl(locale, "posts")}
+        class="text-accent text-sm font-medium transition-opacity hover:opacity-70"
+      >
         {t.home.allPosts}
         <IconArrowRight class="inline-block rtl:-rotate-180" />
-      </LinkButton>
+      </a>
     </div>
   </main>
   <Footer />
